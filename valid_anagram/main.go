@@ -11,6 +11,7 @@ func is_anagram(s string, t string) bool {
 	} 
 
 	count := [26]int{} //this is a hash maps which maintains the frequency of each character
+	// count := make(map[rune]int) to handle Unicode characters in Go.  str := "Hello, 世界!"
 	for _, c := range s {
 		count[c- 'a']++
 	}
