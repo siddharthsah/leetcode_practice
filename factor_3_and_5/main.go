@@ -16,6 +16,8 @@ func factor_3_5(n int)[]int {
 	}
 	return factors
 }
+//Time Complexity: O(n)
+//Space Complexity: O(k), where k is the number of factors of 3 or 5.
 
 func main(){
 	n := 30
