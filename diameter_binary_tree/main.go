@@ -11,24 +11,43 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
-func diameterOfBinaryTree(root *TreeNode) int {
-	maxLength := 0
-	dfs(root, &maxLength)
-	return maxLength
-}
+// func diameterOfBinaryTree(root *TreeNode) int {
+// 	maxLength := 0
+// 	dfs(root, &maxLength)
+// 	return maxLength
+// }
 
-func dfs(t *TreeNode, maxLength *int) int {
-	if t == nil {
-		return 0
+// func dfs(t *TreeNode, maxLength *int) int {
+// 	if t == nil {
+// 		return 0
+// 	}
+
+// 	left := dfs(t.Left, maxLength)
+// 	right := dfs(t.Right, maxLength)
+// 	*maxLength = max(*maxLength, left+right)
+
+// 	return max(left, right) + 1
+// } 
+func diameterOfBinaryTree(root *TreeNode) int {
+	diameter := 0
+
+	var height func(node *TreeNode) int
+	height = func(node *TreeNode) int {
+			if node == nil {
+					return 0
+			}
+
+			leftHeight := height(node.Left)
+			rightHeight := height(node.Right)
+
+			diameter = max(diameter, leftHeight+rightHeight) // No float conversions
+
+			return max(leftHeight, rightHeight) + 1 // No float conversions
 	}
 
-	left := dfs(t.Left, maxLength)
-	right := dfs(t.Right, maxLength)
-	*maxLength = max(*maxLength, left+right)
-
-	return max(left, right) + 1
+	height(root)
+	return diameter
 }
-
 func max(a, b int) int {
 	if a > b {
 		return a
